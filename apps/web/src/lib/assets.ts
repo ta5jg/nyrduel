@@ -11,28 +11,28 @@
 import type { HeroId } from "@nyrduel/protocol";
 
 export const HERO_ART: Record<HeroId, string> = {
-  soldier: "/heroes/soldier.svg",
-  brute: "/heroes/brute.svg",
-  archer: "/heroes/archer.svg",
-  rogue: "/heroes/rogue.svg",
-  mage: "/heroes/mage.svg",
-  paladin: "/heroes/paladin.svg"
+  soldier: "/heroes/soldier.png",
+  brute: "/heroes/brute.png",
+  archer: "/heroes/archer.png",
+  rogue: "/heroes/rogue.png",
+  mage: "/heroes/mage.png",
+  paladin: "/heroes/paladin.png"
 };
 
 export const ARENAS = [
-  "/arenas/forest.svg",
-  "/arenas/peaks.svg",
-  "/arenas/grove.svg",
-  "/arenas/storm.svg",
-  "/arenas/colosseum.svg"
+  "/arenas/forest.jpg",
+  "/arenas/peaks.jpg",
+  "/arenas/grove.jpg",
+  "/arenas/storm.jpg",
+  "/arenas/colosseum.jpg"
 ] as const;
 
 export const ARENA_NAMES: Record<string, string> = {
-  "/arenas/forest.svg": "Sunlit Glade",
-  "/arenas/peaks.svg": "Twilight Peaks",
-  "/arenas/grove.svg": "Moonlit Grove",
-  "/arenas/storm.svg": "Storm Coast",
-  "/arenas/colosseum.svg": "Old Colosseum"
+  "/arenas/forest.jpg": "Sunlit Glade",
+  "/arenas/peaks.jpg": "Twilight Peaks",
+  "/arenas/grove.jpg": "Moonlit Grove",
+  "/arenas/storm.jpg": "Storm Coast",
+  "/arenas/colosseum.jpg": "Old Colosseum"
 };
 
 /** Pick today's arena from the seed so the world sees the same backdrop. */

@@ -36,12 +36,12 @@ export const HERO_ART: Record<HeroId, string> = {
 export type Facing = "left" | "right" | "center";
 
 export const HERO_FACING: Record<HeroId, Facing> = {
-  soldier: "right",
-  brute: "right",
+  soldier: "left",
+  brute: "left",
   archer: "right",
-  rogue: "right",
-  mage: "right",
-  paladin: "right"
+  rogue: "left",
+  mage: "left",
+  paladin: "center"
 };
 
 /** Returns true if the sprite should be CSS-mirrored to face inward. */

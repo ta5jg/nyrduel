@@ -587,16 +587,29 @@ h1, h2, h3, h4 {
   place-items: end center;
 }
 
+.fighter-art {
+  position: relative;
+}
+
+.fighter-art::after {
+  /* soft ground shadow — anchors the character to the arena floor */
+  content: "";
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: -2%;
+  height: 8%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55), transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
 .fighter-art img {
   width: 100%;
   height: auto;
   display: block;
   filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.55));
   user-select: none;
-  /* generous mask — keeps full character visible and only fades the
-     outermost edge of the opaque PNG background into the arena */
-  -webkit-mask-image: radial-gradient(ellipse 85% 95% at 50% 50%, black 80%, transparent 100%);
-  mask-image: radial-gradient(ellipse 85% 95% at 50% 50%, black 80%, transparent 100%);
 }
 
 .arena-fighter.foe .fighter-art img {

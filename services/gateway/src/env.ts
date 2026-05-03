@@ -9,7 +9,7 @@ import "dotenv/config";
 import { z } from "zod";
 
 const EnvSchema = z.object({
-  PORT: z.coerce.number().int().min(1).max(65535).default(8787),
+  PORT: z.coerce.number().int().min(1).max(65535).default(8788),
   HOST: z.string().default("0.0.0.0"),
   DB_PATH: z.string().default("./data/nyrduel.sqlite"),
   CORS_ORIGIN: z.string().default("*"),

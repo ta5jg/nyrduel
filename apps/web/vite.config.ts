@@ -7,8 +7,8 @@ export default defineConfig({
     port: 5174,
     host: true,
     proxy: {
-      "/duel": "http://localhost:8787",
-      "/health": "http://localhost:8787"
+      "/duel": "http://localhost:8788",
+      "/health": "http://localhost:8788"
     }
   },
   build: {

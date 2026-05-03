@@ -20,7 +20,7 @@ FROM node:22.16-alpine AS runtime
 RUN corepack enable
 WORKDIR /app
 ENV NODE_ENV=production
-ENV PORT=8787
+ENV PORT=8788
 ENV HOST=0.0.0.0
 ENV DB_PATH=/app/data/nyrduel.sqlite
 COPY --from=build /app/services/gateway/dist ./services/gateway/dist
@@ -30,6 +30,6 @@ COPY --from=build /app/packages ./packages
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/services/gateway/node_modules ./services/gateway/node_modules
 RUN mkdir -p /app/data
-EXPOSE 8787
+EXPOSE 8788
 WORKDIR /app/services/gateway
 CMD ["node", "dist/index.js"]

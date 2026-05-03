@@ -27,7 +27,7 @@ nyrduel/
 
 ```bash
 pnpm install
-pnpm dev          # runs web (http://localhost:5174) + gateway (http://localhost:8787)
+pnpm dev          # runs web (http://localhost:5174) + gateway (http://localhost:8788)
 ```
 
 Or run them individually:

@@ -284,13 +284,11 @@ h1, h2, h3, h4 {
 
 .pick-portrait {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 3 / 4;
   background:
     radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.06), transparent 70%),
     linear-gradient(135deg, rgba(255,255,255,.04), transparent);
   border-radius: var(--radius-sm);
-  display: grid;
-  place-items: end center;
   overflow: hidden;
   margin-bottom: 4px;
   border: 1px solid rgba(255,255,255,.04);
@@ -300,11 +298,10 @@ h1, h2, h3, h4 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 50%;
   filter: drop-shadow(0 4px 6px rgba(0,0,0,.5));
   transition: transform var(--t-fast) ease;
-  /* soften any non-transparent background into an oval halo */
-  -webkit-mask-image: radial-gradient(ellipse 78% 92% at 50% 50%, black 70%, transparent 100%);
-  mask-image: radial-gradient(ellipse 78% 92% at 50% 50%, black 70%, transparent 100%);
+  display: block;
 }
 
 .pick-card:hover:not(:disabled) .pick-portrait img {
@@ -389,24 +386,21 @@ h1, h2, h3, h4 {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 100%, rgba(255,69,102,.20), transparent 70%),
-    var(--bg-elev-2);
+  background: var(--bg-elev-2);
   border: 2px solid var(--danger);
-  display: grid;
-  place-items: end center;
   flex-shrink: 0;
   overflow: hidden;
-  padding: 4px 4px 0;
+  position: relative;
 }
 
 .opponent-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: absolute;
+  width: 200%;
+  height: auto;
+  left: 50%;
+  top: -8%;
+  transform: translateX(-50%);
   filter: drop-shadow(0 2px 3px rgba(0,0,0,.5));
-  -webkit-mask-image: radial-gradient(circle at 50% 45%, black 70%, transparent 100%);
-  mask-image: radial-gradient(circle at 50% 45%, black 70%, transparent 100%);
 }
 
 .opponent-info {
@@ -599,10 +593,10 @@ h1, h2, h3, h4 {
   display: block;
   filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.55));
   user-select: none;
-  /* soft elliptical mask blends opaque PNG bg into the arena;
-     character is centered ~55% from top so ellipse offset matches */
-  -webkit-mask-image: radial-gradient(ellipse 60% 78% at 50% 55%, black 65%, transparent 100%);
-  mask-image: radial-gradient(ellipse 60% 78% at 50% 55%, black 65%, transparent 100%);
+  /* generous mask — keeps full character visible and only fades the
+     outermost edge of the opaque PNG background into the arena */
+  -webkit-mask-image: radial-gradient(ellipse 85% 95% at 50% 50%, black 80%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 95% at 50% 50%, black 80%, transparent 100%);
 }
 
 .arena-fighter.foe .fighter-art img {
@@ -763,18 +757,17 @@ h1, h2, h3, h4 {
   background: var(--bg-elev);
   border: 1px solid var(--border);
   overflow: hidden;
-  display: grid;
-  place-items: end center;
-  padding: 2px 2px 0;
+  position: relative;
+  flex-shrink: 0;
 }
 
 .lb-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,.4));
-  -webkit-mask-image: radial-gradient(circle at 50% 45%, black 70%, transparent 100%);
-  mask-image: radial-gradient(circle at 50% 45%, black 70%, transparent 100%);
+  position: absolute;
+  width: 200%;
+  height: auto;
+  left: 50%;
+  top: -6%;
+  transform: translateX(-50%);
 }
 
 .lb-row.you {

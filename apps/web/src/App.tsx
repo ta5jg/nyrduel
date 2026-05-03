@@ -65,6 +65,15 @@ export function App() {
     };
   }, []);
 
+  const onPlayAgain = useCallback(() => {
+    clearSavedResult();
+    setSaved(null);
+    setHero(null);
+    setAbility(null);
+    setSubmitErr(null);
+    setPhase("pre");
+  }, []);
+
   const onBattleComplete = useCallback(
     async (r: CompletedBattle) => {
       if (!today || !hero || !ability) return;
@@ -192,6 +201,7 @@ export function App() {
           rank={saved.rank}
           totalPlayers={saved.totalPlayers}
           user={getUserId()}
+          onPlayAgain={onPlayAgain}
         />
       )}
 

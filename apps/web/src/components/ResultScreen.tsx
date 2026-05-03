@@ -18,6 +18,7 @@ type Props = {
   rank: number;
   totalPlayers: number;
   user: string;
+  onPlayAgain: () => void;
 };
 
 export function ResultScreen(p: Props) {
@@ -67,8 +68,14 @@ export function ResultScreen(p: Props) {
           totalPlayers={p.totalPlayers}
         />
 
-        <div className="result-meta">
-          Next duel in <strong><Countdown /></strong>
+        <div className="result-actions">
+          <button type="button" className="btn btn-primary" onClick={p.onPlayAgain}>
+            Play again
+          </button>
+        </div>
+
+        <div className="result-meta" style={{ marginTop: 14 }}>
+          Next duel in <strong><Countdown /></strong> · only your best score counts
         </div>
       </div>
 

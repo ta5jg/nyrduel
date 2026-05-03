@@ -15,7 +15,7 @@ import {
   runBattle
 } from "@nyrduel/engine";
 import type { AbilityId, HeroId } from "@nyrduel/protocol";
-import { ARENA_NAMES, HERO_ART, arenaForSeed } from "../lib/assets.js";
+import { ARENA_NAMES, HERO_ART, arenaForSeed, shouldMirrorHero } from "../lib/assets.js";
 
 const TICK_MS = 220;
 const FLASH_MS = 160;
@@ -129,7 +129,12 @@ function Fighter({
         </div>
       </div>
       <div className="fighter-art">
-        <img src={HERO_ART[heroId]} alt={hero.name} draggable={false} />
+        <img
+          src={HERO_ART[heroId]}
+          alt={hero.name}
+          draggable={false}
+          style={shouldMirrorHero(heroId, side) ? { transform: "scaleX(-1)" } : undefined}
+        />
         {popup && (
           <div key={popup.nonce} className={`dmg-float ${popup.crit ? "crit" : ""}`}>
             -{popup.dmg}

@@ -19,6 +19,39 @@ export const HERO_ART: Record<HeroId, string> = {
   paladin: "/heroes/paladin.png"
 };
 
+/**
+ * Natural facing direction of each hero in the source PNG. Hand-tagged
+ * because the art comes from generative tools (DALL-E etc.) and each
+ * character lands with its own orientation. The arena uses this to decide
+ * whether to flip the sprite so both fighters face each other.
+ *
+ * - "right"  → the character looks toward the viewer's right
+ * - "left"   → the character looks toward the viewer's left
+ * - "center" → the character looks at the camera; never mirrored
+ *
+ * Convention in arena layout: player is on the left, foe is on the right.
+ * The arena flips a sprite when its natural facing is *away* from the
+ * opponent's slot.
+ */
+export type Facing = "left" | "right" | "center";
+
+export const HERO_FACING: Record<HeroId, Facing> = {
+  soldier: "right",
+  brute: "right",
+  archer: "right",
+  rogue: "right",
+  mage: "right",
+  paladin: "right"
+};
+
+/** Returns true if the sprite should be CSS-mirrored to face inward. */
+export function shouldMirrorHero(heroId: HeroId, side: "a" | "b"): boolean {
+  const facing = HERO_FACING[heroId];
+  if (facing === "center") return false;
+  const want = side === "a" ? "right" : "left";
+  return facing !== want;
+}
+
 export const ARENAS = [
   "/arenas/forest.jpg",
   "/arenas/peaks.jpg",

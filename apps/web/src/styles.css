@@ -612,14 +612,9 @@ h1, h2, h3, h4 {
   user-select: none;
 }
 
-/* Player on the left gets mirrored so they face the foe on the right.
- * DALL-E portraits commonly default to "looking toward viewer's right";
- * mirroring the left fighter turns them inward, foe stays in its
- * natural orientation. If your art faces the opposite way, swap this
- * selector from .you to .foe. */
-.arena-fighter.you .fighter-art img {
-  transform: scaleX(-1);
-}
+/* Per-hero facing comes from HERO_FACING in lib/assets.ts; the arena
+ * applies the scaleX(-1) inline only when needed. Don't mirror here — it
+ * would override the per-hero logic. */
 
 .dmg-float {
   position: absolute;

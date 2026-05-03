@@ -1,0 +1,15 @@
+services:
+  nyrduel:
+    build: .
+    ports:
+      - "8787:8787"
+    environment:
+      NODE_ENV: production
+      PORT: 8787
+      HOST: 0.0.0.0
+      DB_PATH: /app/data/nyrduel.sqlite
+      CORS_ORIGIN: "*"
+      PRIZE_POOL_USDTG: "100"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

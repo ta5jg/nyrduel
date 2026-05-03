@@ -1,0 +1,13 @@
+{
+  "name": "Nyrduel — Daily Duel",
+  "short_name": "Nyrduel",
+  "description": "Daily 1v1 duel. Same opponent worldwide today.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0c0e14",
+  "background_color": "#0c0e14",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,17 @@
+node_modules
+**/node_modules
+dist
+**/dist
+.turbo
+coverage
+**/coverage
+*.log
+.git
+.github
+.idea
+.vscode
+data
+*.sqlite
+README.md
+LICENSE
+.editorconfig

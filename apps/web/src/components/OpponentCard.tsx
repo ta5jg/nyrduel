@@ -1,14 +1,6 @@
 import { getAbility, getHero } from "@nyrduel/engine";
 import type { AbilityId, HeroId } from "@nyrduel/protocol";
-
-const FOE_EMOJI: Record<HeroId, string> = {
-  soldier: "🛡️",
-  brute: "💪",
-  archer: "🏹",
-  rogue: "🗡️",
-  mage: "🔮",
-  paladin: "⚔️"
-};
+import { HERO_ART } from "../lib/assets.js";
 
 export function OpponentCard({
   heroId,
@@ -21,7 +13,9 @@ export function OpponentCard({
   const ability = getAbility(abilityId);
   return (
     <div className="opponent">
-      <div className="opponent-avatar">{FOE_EMOJI[heroId]}</div>
+      <div className="opponent-avatar">
+        <img src={HERO_ART[heroId]} alt={hero.name} draggable={false} />
+      </div>
       <div className="opponent-info">
         <div className="label">Today's foe</div>
         <div className="name">

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="100%" r="60%">
+      <stop offset="0" stop-color="#ffa97a" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#ffa97a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a1d2a"/>
+      <stop offset="1" stop-color="#0c0e14"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="80" ry="14" fill="url(#glow)"/>
+  <!-- club -->
+  <rect x="38" y="80" width="14" height="120" fill="#262a38" transform="rotate(-12 45 140)"/>
+  <ellipse cx="34" cy="80" rx="32" ry="22" fill="#1a1d2a"/>
+  <circle cx="22" cy="74" r="6" fill="#262a38"/>
+  <circle cx="42" cy="68" r="6" fill="#262a38"/>
+  <circle cx="48" cy="86" r="6" fill="#262a38"/>
+  <!-- head (slumped forward) -->
+  <circle cx="128" cy="80" r="34" fill="url(#body)"/>
+  <!-- body (broad) -->
+  <path d="M 78 110 L 178 110 Q 192 116 188 130 L 174 220 Q 168 230 158 230 L 98 230 Q 88 230 82 220 L 68 130 Q 64 116 78 110 Z" fill="url(#body)"/>
+  <!-- belt -->
+  <rect x="84" y="170" width="88" height="12" fill="#262a38"/>
+  <circle cx="128" cy="176" r="8" fill="#1a1d2a"/>
+</svg>

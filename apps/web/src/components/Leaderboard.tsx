@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { DuelLeaderboardEntry, DuelLeaderboardResponse } from "@nyrduel/protocol";
 import { api } from "../lib/api.js";
 import { formatTicks } from "../lib/format.js";
+import { HERO_ART } from "../lib/assets.js";
 
 const RANK_CLASS = (rank: number): string =>
   rank === 1 ? "gold" : rank === 2 ? "silver" : rank === 3 ? "bronze" : "";
@@ -72,6 +73,9 @@ function Row({ entry, isYou }: { entry: DuelLeaderboardEntry; isYou: boolean }) 
   return (
     <div className={`lb-row ${isYou ? "you" : ""}`}>
       <span className={`rank ${RANK_CLASS(entry.rank)}`}>#{entry.rank}</span>
+      <div className="lb-avatar">
+        <img src={HERO_ART[entry.hero]} alt={entry.hero} draggable={false} />
+      </div>
       <div className="who">
         <span className="name">
           {name}

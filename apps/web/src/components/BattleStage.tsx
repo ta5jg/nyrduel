@@ -1,10 +1,10 @@
 /* =============================================================================
- * Cinematic battle playback.
+ * BattleArena — cinematic 1v1 playback against a Ghibli-inspired backdrop.
  *
- * The engine is invoked once on mount to produce the full event timeline; we
- * then schedule UI updates one event per ~220ms. The simulation itself is
- * deterministic — we're only animating the events, not generating them — which
- * keeps the playback in lockstep with the gateway's authoritative rerun.
+ * The engine produces the full deterministic event timeline on mount; we
+ * animate one event per ~220ms. Sprites flash/shake/glow via CSS classes
+ * driven from reducer state. Background is selected per-seed so today's
+ * arena is the same for everyone.
  * ============================================================================= */
 
 import { useEffect, useReducer, useRef } from "react";
@@ -15,6 +15,7 @@ import {
   runBattle
 } from "@nyrduel/engine";
 import type { AbilityId, HeroId } from "@nyrduel/protocol";
+import { ARENA_NAMES, HERO_ART, arenaForSeed } from "../lib/assets.js";
 
 const TICK_MS = 220;
 const FLASH_MS = 160;
@@ -36,7 +37,7 @@ type State = {
   acting: "a" | "b" | null;
   hitting: "a" | "b" | null;
   crit: boolean;
-  popup: { side: "a" | "b"; dmg: number; crit: boolean } | null;
+  popup: { side: "a" | "b"; dmg: number; crit: boolean; nonce: number } | null;
   log: LogEntry[];
 };
 
@@ -47,6 +48,7 @@ type Action =
   | { kind: "end"; hpA: number; hpB: number };
 
 let logSeq = 0;
+let popupSeq = 0;
 
 function reducer(s: State, a: Action): State {
   switch (a.kind) {
@@ -61,12 +63,12 @@ function reducer(s: State, a: Action): State {
         acting: a.by,
         hitting: target,
         crit: a.crit,
-        popup: { side: target, dmg: a.damage, crit: a.crit },
+        popup: { side: target, dmg: a.damage, crit: a.crit, nonce: ++popupSeq },
         log: [...s.log, { id: ++logSeq, text: a.logText, cls: a.crit ? "crit" : a.by === "a" ? "you" : "foe" }].slice(-40)
       };
     }
     case "clear-flash":
-      return { ...s, acting: null, hitting: null, crit: false, popup: null };
+      return { ...s, acting: null, hitting: null, crit: false };
     case "end":
       return { ...s, hpA: a.hpA, hpB: a.hpB, acting: null, hitting: null, popup: null };
   }
@@ -84,6 +86,61 @@ const INITIAL: State = {
   log: []
 };
 
+type FighterSide = "a" | "b";
+
+function Fighter({
+  side,
+  hp,
+  max,
+  heroId,
+  abilityId,
+  acting,
+  hit,
+  crit,
+  popup
+}: {
+  side: FighterSide;
+  hp: number;
+  max: number;
+  heroId: HeroId;
+  abilityId: AbilityId;
+  acting: boolean;
+  hit: boolean;
+  crit: boolean;
+  popup: { dmg: number; crit: boolean; nonce: number } | null;
+}) {
+  const hero = getHero(heroId);
+  const ability = getAbility(abilityId);
+  const sideClass = side === "a" ? "you" : "foe";
+  const fxClass = acting ? "acting" : hit ? (crit ? "crit-hit" : "hit") : "";
+  const pct = Math.max(0, Math.min(100, (hp / Math.max(1, max)) * 100));
+  return (
+    <div className={`arena-fighter ${sideClass} ${fxClass}`}>
+      <div className="fighter-card">
+        <div className="fighter-name">
+          {hero.name}
+          <span> · {ability.name}</span>
+        </div>
+        <div className="fighter-hpbar">
+          <div className="fighter-hpbar-fill" style={{ width: `${pct}%` }} />
+          <div className="fighter-hpbar-label">
+            {hp}/{max}
+          </div>
+        </div>
+      </div>
+      <div className="fighter-art">
+        <img src={HERO_ART[heroId]} alt={hero.name} draggable={false} />
+        {popup && (
+          <div key={popup.nonce} className={`dmg-float ${popup.crit ? "crit" : ""}`}>
+            -{popup.dmg}
+            {popup.crit && <span className="crit-tag">CRIT!</span>}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export function BattleStage({
   seed,
   player,
@@ -99,6 +156,8 @@ export function BattleStage({
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
   const logRef = useRef<HTMLDivElement | null>(null);
+  const arenaUrl = arenaForSeed(seed);
+  const arenaName = ARENA_NAMES[arenaUrl] ?? "Arena";
 
   useEffect(() => {
     const a = resolveUnit(player.hero, player.ability);
@@ -136,12 +195,12 @@ export function BattleStage({
                 remainingHpB: ev.hpB
               });
             }
-          }, 600)
+          }, 700)
         );
       }
     }
 
-    timers.push(window.setTimeout(step, 500));
+    timers.push(window.setTimeout(step, 600));
     return () => {
       cancelled = true;
       timers.forEach((t) => window.clearTimeout(t));
@@ -152,61 +211,40 @@ export function BattleStage({
     if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
   }, [state.log]);
 
-  const youHero = getHero(player.hero);
-  const youAb = getAbility(player.ability);
-  const foeHero = getHero(opponent.hero);
-  const foeAb = getAbility(opponent.ability);
-
   return (
-    <div className="battle">
-      <div className="battle-row you">
-        <div
-          className={[
-            "combatant",
-            state.acting === "a" ? "acting" : "",
-            state.hitting === "a" ? (state.crit ? "crit-hit" : "hit") : ""
-          ].join(" ")}
-        >
-          <div className="name">
-            <span>You · {youHero.name}</span>
-            <span className="ability">{youAb.name}</span>
-          </div>
-          <div className="hpbar">
-            <div className="hpbar-fill" style={{ width: `${(state.hpA / state.maxA) * 100}%` }} />
-            <div className="hpbar-label">
-              {state.hpA} / {state.maxA}
-            </div>
-          </div>
-          {state.popup?.side === "a" && (
-            <div className={`dmg-popup ${state.popup.crit ? "crit" : ""}`}>-{state.popup.dmg}</div>
-          )}
-        </div>
-      </div>
+    <>
+      <div
+        className="arena"
+        style={{ backgroundImage: `url(${arenaUrl})` }}
+        aria-label={`Arena: ${arenaName}`}
+      >
+        <div className="arena-clouds" aria-hidden />
+        <div className="arena-floor" aria-hidden />
+        <div className="arena-name">{arenaName}</div>
 
-      <div className="battle-vs">VS</div>
+        <Fighter
+          side="a"
+          hp={state.hpA}
+          max={state.maxA}
+          heroId={player.hero}
+          abilityId={player.ability}
+          acting={state.acting === "a"}
+          hit={state.hitting === "a"}
+          crit={state.crit}
+          popup={state.popup?.side === "a" ? state.popup : null}
+        />
 
-      <div className="battle-row foe">
-        <div
-          className={[
-            "combatant",
-            state.acting === "b" ? "acting" : "",
-            state.hitting === "b" ? (state.crit ? "crit-hit" : "hit") : ""
-          ].join(" ")}
-        >
-          <div className="name">
-            <span>Foe · {foeHero.name}</span>
-            <span className="ability">{foeAb.name}</span>
-          </div>
-          <div className="hpbar foe">
-            <div className="hpbar-fill" style={{ width: `${(state.hpB / state.maxB) * 100}%` }} />
-            <div className="hpbar-label">
-              {state.hpB} / {state.maxB}
-            </div>
-          </div>
-          {state.popup?.side === "b" && (
-            <div className={`dmg-popup ${state.popup.crit ? "crit" : ""}`}>-{state.popup.dmg}</div>
-          )}
-        </div>
+        <Fighter
+          side="b"
+          hp={state.hpB}
+          max={state.maxB}
+          heroId={opponent.hero}
+          abilityId={opponent.ability}
+          acting={state.acting === "b"}
+          hit={state.hitting === "b"}
+          crit={state.crit}
+          popup={state.popup?.side === "b" ? state.popup : null}
+        />
       </div>
 
       <div className="battle-log" ref={logRef}>
@@ -217,6 +255,6 @@ export function BattleStage({
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }

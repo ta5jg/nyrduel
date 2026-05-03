@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="100%" r="60%">
+      <stop offset="0" stop-color="#ffce4d" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#ffce4d" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a1d2a"/>
+      <stop offset="1" stop-color="#0c0e14"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="65" ry="14" fill="url(#glow)"/>
+  <!-- helm -->
+  <path d="M 102 50 L 154 50 Q 162 50 162 64 L 158 96 Q 158 106 148 106 L 108 106 Q 98 106 98 96 L 94 64 Q 94 50 102 50 Z" fill="url(#body)"/>
+  <!-- visor slit -->
+  <rect x="106" y="76" width="44" height="6" fill="#0c0e14"/>
+  <!-- helm crest -->
+  <path d="M 124 50 L 128 28 L 132 50 Z" fill="#ffce4d"/>
+  <!-- shoulder armor (broad) -->
+  <ellipse cx="86" cy="120" rx="22" ry="14" fill="url(#body)"/>
+  <ellipse cx="170" cy="120" rx="22" ry="14" fill="url(#body)"/>
+  <!-- breastplate -->
+  <path d="M 90 110 L 166 110 Q 178 116 174 130 L 168 220 Q 164 230 154 230 L 102 230 Q 92 230 88 220 L 82 130 Q 78 116 90 110 Z" fill="url(#body)"/>
+  <!-- cross emblem -->
+  <rect x="124" y="138" width="8" height="40" fill="#ffce4d"/>
+  <rect x="112" y="150" width="32" height="8" fill="#ffce4d"/>
+  <!-- sword (held vertical) -->
+  <rect x="178" y="80" width="6" height="140" fill="#353a4d"/>
+  <rect x="166" y="98" width="30" height="6" fill="#ffce4d"/>
+  <polygon points="178,80 184,80 181,68" fill="#ffce4d"/>
+</svg>

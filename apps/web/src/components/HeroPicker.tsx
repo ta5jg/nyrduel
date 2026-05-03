@@ -1,6 +1,7 @@
 import { HEROES } from "@nyrduel/engine";
 import type { HeroId } from "@nyrduel/protocol";
 import { StatChips } from "./StatChips.js";
+import { HERO_ART } from "../lib/assets.js";
 
 export function HeroPicker({
   value,
@@ -21,6 +22,9 @@ export function HeroPicker({
             onClick={() => onChange(h.id)}
             aria-pressed={value === h.id}
           >
+            <div className="pick-portrait">
+              <img src={HERO_ART[h.id]} alt={h.name} draggable={false} />
+            </div>
             <div className="name">{h.name}</div>
             <div className="blurb">{h.blurb}</div>
             <StatChips hero={h} />

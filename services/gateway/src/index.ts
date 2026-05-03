@@ -20,6 +20,7 @@ import { registerDuelToday } from "./routes/duelToday.js";
 import { registerDuelSubmit } from "./routes/duelSubmit.js";
 import { registerDuelLeaderboard } from "./routes/duelLeaderboard.js";
 import { registerDuelStreak } from "./routes/duelStreak.js";
+import { registerSignup } from "./routes/signup.js";
 
 async function main(): Promise<void> {
   const env = readEnv();
@@ -52,6 +53,7 @@ async function main(): Promise<void> {
   registerDuelSubmit(app, { db });
   registerDuelLeaderboard(app, { db });
   registerDuelStreak(app, { db });
+  registerSignup(app, { db });
 
   // Static web bundle (production). Serves /apps/web/dist relative to the
   // gateway's working directory; falls back to index.html for SPA routes.

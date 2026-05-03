@@ -17,8 +17,24 @@ import {
 import type { AbilityId, HeroId } from "@nyrduel/protocol";
 import { ARENA_NAMES, HERO_ART, arenaForSeed, shouldMirrorHero } from "../lib/assets.js";
 
-const TICK_MS = 220;
-const FLASH_MS = 160;
+/* ---------- Cinematic pacing ----------
+ * Target ~18 s of action regardless of how many hits the fight produces.
+ * Engine outcomes are deterministic — only the playback timing is shaped
+ * here. Per-act dwell is computed from event count, then crits and the
+ * killing blow get additional slow-mo so the dramatic beats land. */
+const TARGET_ACTS_MS = 17000;
+const PRE_BATTLE_MS = 1400;
+const POST_BATTLE_MS = 1300;
+const MIN_TICK_MS = 700;
+const MAX_TICK_MS = 1800;
+const CRIT_BONUS_MS = 400;
+const KO_BONUS_MS = 700;
+
+function computeBaseTick(numActs: number): number {
+  if (numActs <= 0) return MIN_TICK_MS;
+  const target = TARGET_ACTS_MS / numActs;
+  return Math.max(MIN_TICK_MS, Math.min(MAX_TICK_MS, target));
+}
 
 export type CompletedBattle = {
   outcome: "a" | "b" | "draw";

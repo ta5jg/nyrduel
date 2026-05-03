@@ -188,6 +188,9 @@ export function BattleStage({
     const result = runBattle({ seed, a, b });
     const youName = getHero(player.hero).name;
     const foeName = getHero(opponent.hero).name;
+    const numActs = result.events.reduce((n, e) => (e.type === "act" ? n + 1 : n), 0);
+    const baseTick = computeBaseTick(numActs);
+    const flashMs = Math.min(baseTick - 100, 280);
 
     let cancelled = false;
     let i = 0;
@@ -202,8 +205,10 @@ export function BattleStage({
           `${ev.by === "a" ? youName : foeName} hits ${ev.by === "a" ? foeName : youName} ` +
           `for ${ev.damage}${ev.crit ? " · CRIT" : ""}`;
         dispatch({ kind: "act", by: ev.by, hpA: ev.hpA, hpB: ev.hpB, damage: ev.damage, crit: ev.crit, logText: text });
-        timers.push(window.setTimeout(() => dispatch({ kind: "clear-flash" }), FLASH_MS));
-        timers.push(window.setTimeout(step, TICK_MS));
+        const isKO = ev.hpA <= 0 || ev.hpB <= 0;
+        const dwell = baseTick + (ev.crit ? CRIT_BONUS_MS : 0) + (isKO ? KO_BONUS_MS : 0);
+        timers.push(window.setTimeout(() => dispatch({ kind: "clear-flash" }), flashMs));
+        timers.push(window.setTimeout(step, dwell));
       } else {
         dispatch({ kind: "end", hpA: ev.hpA, hpB: ev.hpB });
         timers.push(
@@ -216,12 +221,12 @@ export function BattleStage({
                 remainingHpB: ev.hpB
               });
             }
-          }, 700)
+          }, POST_BATTLE_MS)
         );
       }
     }
 
-    timers.push(window.setTimeout(step, 600));
+    timers.push(window.setTimeout(step, PRE_BATTLE_MS));
     return () => {
       cancelled = true;
       timers.forEach((t) => window.clearTimeout(t));

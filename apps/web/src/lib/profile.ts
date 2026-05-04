@@ -2,7 +2,7 @@
  * Local profile — stable device id, display name, "already played today" cache.
  * ============================================================================= */
 
-import type { AbilityId, HeroId } from "@nyrduel/protocol";
+import type { AbilityId, AlienBossId, HeroId } from "@nyrduel/protocol";
 
 const K_USER = "nyrduel:user";
 const K_NAME = "nyrduel:name";
@@ -12,7 +12,7 @@ export type SavedResult = {
   date: string;
   hero: HeroId;
   ability: AbilityId;
-  opponent: { hero: HeroId; ability: AbilityId };
+  opponent: { alienBossId: AlienBossId };
   outcome: "a" | "b" | "draw";
   ticks: number;
   remainingHpA: number;

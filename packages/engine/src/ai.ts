@@ -1,18 +1,29 @@
 /* =============================================================================
- * Daily AI picker — deterministic from the seed.
+ * File:           packages/engine/src/ai.ts
+ * Author:         USDTG GROUP TECHNOLOGY LLC
+ * Developer:      Irfan Gedik
+ * Created Date:   2026-05-03
+ * Last Update:    2026-05-04
+ * Version:        0.2.0
  *
- * Identical seed → identical opponent. The gateway derives the AI here on
- * /duel/today, the client renders it, and on /duel/submit the gateway
- * re-derives it (instead of trusting the client) to compose the matchup.
+ * Description:
+ *   Daily opponent picker — deterministic from the seed.
+ *
+ *   v0.2: opponent is now one of twelve alien bosses (no human heroes as
+ *   antagonists). Same seed → same boss; every player worldwide faces the
+ *   same alien on a given UTC day.
+ *
+ * License:
+ *   Proprietary. All rights reserved. See LICENSE in the repository root.
  * ============================================================================= */
 
-import { ABILITY_IDS, HERO_IDS, type AbilityId, type HeroId } from "@nyrduel/protocol";
+import { ALIEN_BOSS_IDS, type AlienBossId } from "@nyrduel/protocol";
 import { makeRng } from "./rng.js";
 
-export function pickAi(seed: string): { hero: HeroId; ability: AbilityId } {
+/** Pick today's alien boss deterministically from the daily seed. */
+export function pickAi(seed: string): { alienBossId: AlienBossId } {
   const rng = makeRng(seed, "ai");
-  const hero = HERO_IDS[rng.int(HERO_IDS.length)];
-  const ability = ABILITY_IDS[rng.int(ABILITY_IDS.length)];
-  if (!hero || !ability) throw new Error("ai pool empty");
-  return { hero, ability };
+  const bossId = ALIEN_BOSS_IDS[rng.int(ALIEN_BOSS_IDS.length)];
+  if (!bossId) throw new Error("alien boss roster empty");
+  return { alienBossId: bossId };
 }

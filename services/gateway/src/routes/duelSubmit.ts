@@ -19,6 +19,7 @@ import {
   isAbilityId,
   isHeroId,
   pickAi,
+  resolveAlienUnit,
   resolveUnit,
   runBattle,
   scoreFromResult,
@@ -110,7 +111,7 @@ export function registerDuelSubmit(app: FastifyInstance, deps: DuelSubmitDeps): 
 
     const opponent = pickAi(body.seed);
     const playerUnit = resolveUnit(body.player.hero, body.player.ability);
-    const aiUnit = resolveUnit(opponent.hero, opponent.ability);
+    const aiUnit = resolveAlienUnit(opponent.alienBossId);
 
     const result = runBattle({ seed: body.seed, a: playerUnit, b: aiUnit });
     const score = scoreFromResult(result);
@@ -151,7 +152,8 @@ export function registerDuelSubmit(app: FastifyInstance, deps: DuelSubmitDeps): 
       score,
       rank: rankRow.rank,
       totalPlayers: totalRow.total,
-      improvedToday
+      improvedToday,
+      alienBossId: opponent.alienBossId
     };
   });
 }

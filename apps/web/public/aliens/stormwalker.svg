@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="55%">
+      <stop offset="0" stop-color="#4ce9d9" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#4ce9d9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="plasma" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a778ff"/>
+      <stop offset=".5" stop-color="#4ce9d9"/>
+      <stop offset="1" stop-color="#5a3aa0"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="60" ry="14" fill="url(#glow)"/>
+  <!-- 4 crystal stilts -->
+  <path d="M 95 150 L 92 220 L 100 220 Z M 113 150 L 110 220 L 118 220 Z M 137 150 L 138 220 L 146 220 Z M 155 150 L 158 220 L 166 220 Z" fill="#3a2070" stroke="#0c0e14" stroke-width="1.5"/>
+  <!-- plasma torso -->
+  <path d="M 92 80 L 164 80 Q 178 100 174 130 Q 170 150 152 150 L 104 150 Q 86 150 82 130 Q 78 100 92 80 Z" fill="url(#plasma)" stroke="#0c0e14" stroke-width="2"/>
+  <!-- lightning arcs in torso -->
+  <path d="M 100 110 L 116 95 L 110 120 L 130 105 L 124 130" stroke="#fff" stroke-width="1.5" fill="none"/>
+  <path d="M 140 95 L 156 110 L 144 125 L 160 135" stroke="#fff" stroke-width="1.5" fill="none"/>
+  <!-- whip tendrils with discharge -->
+  <path d="M 80 110 Q 50 80 40 50" stroke="#a778ff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 50 80 L 56 70 L 48 76 L 56 65" stroke="#fff" stroke-width="1.2" fill="none"/>
+  <path d="M 176 110 Q 206 80 216 50" stroke="#a778ff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 206 80 L 200 70 L 208 76 L 200 65" stroke="#fff" stroke-width="1.2" fill="none"/>
+  <!-- core -->
+  <circle cx="128" cy="115" r="8" fill="#ffffff"/>
+  <circle cx="128" cy="115" r="14" fill="#4ce9d9" opacity=".5"/>
+</svg>

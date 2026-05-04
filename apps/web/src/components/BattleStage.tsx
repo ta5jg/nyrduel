@@ -10,12 +10,14 @@
 import { useEffect, useReducer, useRef } from "react";
 import {
   getAbility,
+  getAlienBoss,
   getHero,
+  resolveAlienUnit,
   resolveUnit,
   runBattle
 } from "@nyrduel/engine";
-import type { AbilityId, HeroId } from "@nyrduel/protocol";
-import { ARENA_NAMES, HERO_ART, arenaForSeed, shouldMirrorHero } from "../lib/assets.js";
+import type { AbilityId, AlienBossId, HeroId } from "@nyrduel/protocol";
+import { ALIEN_BOSS_ART, ARENA_NAMES, HERO_ART, arenaForSeed, shouldMirrorHero } from "../lib/assets.js";
 
 /* ---------- Cinematic pacing ----------
  * Target ~18 s of action regardless of how many hits the fight produces.
@@ -104,12 +106,18 @@ const INITIAL: State = {
 
 type FighterSide = "a" | "b";
 
+type FighterDisplay = {
+  name: string;
+  subname: string | null;
+  artSrc: string;
+  mirror: boolean;
+};
+
 function Fighter({
   side,
   hp,
   max,
-  heroId,
-  abilityId,
+  display,
   acting,
   hit,
   crit,
@@ -118,15 +126,12 @@ function Fighter({
   side: FighterSide;
   hp: number;
   max: number;
-  heroId: HeroId;
-  abilityId: AbilityId;
+  display: FighterDisplay;
   acting: boolean;
   hit: boolean;
   crit: boolean;
   popup: { dmg: number; crit: boolean; nonce: number } | null;
 }) {
-  const hero = getHero(heroId);
-  const ability = getAbility(abilityId);
   const sideClass = side === "a" ? "you" : "foe";
   const fxClass = acting ? "acting" : hit ? (crit ? "crit-hit" : "hit") : "";
   const pct = Math.max(0, Math.min(100, (hp / Math.max(1, max)) * 100));
@@ -134,8 +139,8 @@ function Fighter({
     <div className={`arena-fighter ${sideClass} ${fxClass}`}>
       <div className="fighter-card">
         <div className="fighter-name">
-          {hero.name}
-          <span> · {ability.name}</span>
+          {display.name}
+          {display.subname && <span> · {display.subname}</span>}
         </div>
         <div className="fighter-hpbar">
           <div className="fighter-hpbar-fill" style={{ width: `${pct}%` }} />
@@ -146,10 +151,10 @@ function Fighter({
       </div>
       <div className="fighter-art">
         <img
-          src={HERO_ART[heroId]}
-          alt={hero.name}
+          src={display.artSrc}
+          alt={display.name}
           draggable={false}
-          style={shouldMirrorHero(heroId, side) ? { transform: "scaleX(-1)" } : undefined}
+          style={display.mirror ? { transform: "scaleX(-1)" } : undefined}
         />
         {popup && (
           <div key={popup.nonce} className={`dmg-float ${popup.crit ? "crit" : ""}`}>
@@ -170,7 +175,7 @@ export function BattleStage({
 }: {
   seed: string;
   player: { hero: HeroId; ability: AbilityId };
-  opponent: { hero: HeroId; ability: AbilityId };
+  opponent: { alienBossId: AlienBossId };
   onComplete: (r: CompletedBattle) => void;
 }) {
   const [state, dispatch] = useReducer(reducer, INITIAL);
@@ -182,12 +187,12 @@ export function BattleStage({
 
   useEffect(() => {
     const a = resolveUnit(player.hero, player.ability);
-    const b = resolveUnit(opponent.hero, opponent.ability);
+    const b = resolveAlienUnit(opponent.alienBossId);
     dispatch({ kind: "init", maxA: a.hp, maxB: b.hp });
 
     const result = runBattle({ seed, a, b });
     const youName = getHero(player.hero).name;
-    const foeName = getHero(opponent.hero).name;
+    const foeName = getAlienBoss(opponent.alienBossId).name;
     const numActs = result.events.reduce((n, e) => (e.type === "act" ? n + 1 : n), 0);
     const baseTick = computeBaseTick(numActs);
     const flashMs = Math.min(baseTick - 100, 280);
@@ -231,11 +236,27 @@ export function BattleStage({
       cancelled = true;
       timers.forEach((t) => window.clearTimeout(t));
     };
-  }, [seed, player.hero, player.ability, opponent.hero, opponent.ability]);
+  }, [seed, player.hero, player.ability, opponent.alienBossId]);
 
   useEffect(() => {
     if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
   }, [state.log]);
+
+  const playerDisplay: FighterDisplay = {
+    name: getHero(player.hero).name,
+    subname: getAbility(player.ability).name,
+    artSrc: HERO_ART[player.hero],
+    mirror: shouldMirrorHero(player.hero, "a")
+  };
+  const foeDisplay: FighterDisplay = {
+    name: getAlienBoss(opponent.alienBossId).name,
+    subname: null,
+    artSrc: ALIEN_BOSS_ART[opponent.alienBossId],
+    // Aliens are designed to face left in their portraits when used as foe
+    // (they sit on the right side of the arena facing the player). We don't
+    // mirror them — the source art ships in the correct orientation.
+    mirror: false
+  };
 
   return (
     <>
@@ -252,8 +273,7 @@ export function BattleStage({
           side="a"
           hp={state.hpA}
           max={state.maxA}
-          heroId={player.hero}
-          abilityId={player.ability}
+          display={playerDisplay}
           acting={state.acting === "a"}
           hit={state.hitting === "a"}
           crit={state.crit}
@@ -264,8 +284,7 @@ export function BattleStage({
           side="b"
           hp={state.hpB}
           max={state.maxB}
-          heroId={opponent.hero}
-          abilityId={opponent.ability}
+          display={foeDisplay}
           acting={state.acting === "b"}
           hit={state.hitting === "b"}
           crit={state.crit}

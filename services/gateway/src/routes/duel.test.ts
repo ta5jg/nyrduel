@@ -39,8 +39,7 @@ describe("GET /duel/today", () => {
     expect(body.ok).toBe(true);
     expect(body.seed).toBe(todaySeed());
     expect(body.date).toBe(todayUtcDate());
-    expect(body.opponent.hero).toBeTypeOf("string");
-    expect(body.opponent.ability).toBeTypeOf("string");
+    expect(body.opponent.alienBossId).toBeTypeOf("string");
     expect(body.prizePoolUsdtg).toBe(100);
   });
 });

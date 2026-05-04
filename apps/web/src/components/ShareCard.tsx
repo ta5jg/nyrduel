@@ -10,14 +10,21 @@
  * ============================================================================= */
 
 import { useState } from "react";
-import { resolveUnit, runBattle, getHero, getAbility } from "@nyrduel/engine";
-import type { AbilityId, HeroId } from "@nyrduel/protocol";
+import {
+  resolveUnit,
+  resolveAlienUnit,
+  runBattle,
+  getHero,
+  getAbility,
+  getAlienBoss
+} from "@nyrduel/engine";
+import type { AbilityId, AlienBossId, HeroId } from "@nyrduel/protocol";
 
 type Props = {
   date: string;
   seed: string;
   player: { hero: HeroId; ability: AbilityId };
-  opponent: { hero: HeroId; ability: AbilityId };
+  opponent: { alienBossId: AlienBossId };
   outcome: "a" | "b" | "draw";
   score: number;
   rank: number;
@@ -26,27 +33,29 @@ type Props = {
 
 export function buildShareText(opts: Props): string {
   const a = resolveUnit(opts.player.hero, opts.player.ability);
-  const b = resolveUnit(opts.opponent.hero, opts.opponent.ability);
+  const b = resolveAlienUnit(opts.opponent.alienBossId);
   const result = runBattle({ seed: opts.seed, a, b });
 
   const grid = result.events
     .filter((ev) => ev.type === "act")
     .map((ev) => {
       if (ev.type !== "act") return "";
-      const sq = ev.by === "a" ? "🟦" : "🟥";
+      const sq = ev.by === "a" ? "🟦" : "🟪";
       return ev.crit ? `${sq}⭐` : sq;
     })
     .join("");
 
   const outcomeMark = opts.outcome === "a" ? "🏆" : opts.outcome === "b" ? "💀" : "🤝";
-  const outcomeWord = opts.outcome === "a" ? "Win" : opts.outcome === "b" ? "Loss" : "Draw";
+  const outcomeWord = opts.outcome === "a" ? "Repelled" : opts.outcome === "b" ? "Overrun" : "Held";
 
   const youHero = getHero(opts.player.hero).name;
   const youAb = getAbility(opts.player.ability).name;
+  const foe = getAlienBoss(opts.opponent.alienBossId).name;
 
   return [
     `Nyrduel ${opts.date}`,
-    `${outcomeMark} ${outcomeWord} · ${opts.score} pts · #${opts.rank}/${opts.totalPlayers}`,
+    `${outcomeMark} ${outcomeWord} the ${foe}`,
+    `${opts.score} pts · #${opts.rank}/${opts.totalPlayers}`,
     `${youHero} + ${youAb}`,
     grid || "(no contact)",
     "https://github.com/ta5jg/nyrduel"

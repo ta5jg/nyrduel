@@ -8,7 +8,7 @@
  * replace them. Do not bake hero metadata (stats) here — that's engine's job.
  * ============================================================================= */
 
-import type { HeroId } from "@nyrduel/protocol";
+import type { AlienBossId, HeroId } from "@nyrduel/protocol";
 
 export const HERO_ART: Record<HeroId, string> = {
   soldier: "/heroes/soldier.png",
@@ -17,6 +17,25 @@ export const HERO_ART: Record<HeroId, string> = {
   rogue: "/heroes/rogue.png",
   mage: "/heroes/mage.png",
   paladin: "/heroes/paladin.png"
+};
+
+/**
+ * Alien boss portraits — opponent side of every duel. Replace these with
+ * the DALL-E paintings from `art/PROMPTS-DALLE-ALIENS.md` once generated.
+ */
+export const ALIEN_BOSS_ART: Record<AlienBossId, string> = {
+  skitterqueen: "/aliens/skitterqueen.svg",
+  voidking: "/aliens/voidking.svg",
+  hivelord: "/aliens/hivelord.svg",
+  glyphtitan: "/aliens/glyphtitan.svg",
+  riftherald: "/aliens/riftherald.svg",
+  crystallarch: "/aliens/crystallarch.svg",
+  nullmaw: "/aliens/nullmaw.svg",
+  stormwalker: "/aliens/stormwalker.svg",
+  mistshaper: "/aliens/mistshaper.svg",
+  echobreed: "/aliens/echobreed.svg",
+  tidegrasp: "/aliens/tidegrasp.svg",
+  worldscar: "/aliens/worldscar.svg"
 };
 
 /**

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0" stop-color="#5a3aa0" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#5a3aa0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="70" ry="12" fill="url(#glow)"/>
+  <!-- vague figure of mist - layered ellipses -->
+  <ellipse cx="128" cy="170" rx="58" ry="60" fill="#3a2070" opacity=".5"/>
+  <ellipse cx="128" cy="155" rx="48" ry="48" fill="#5a3aa0" opacity=".55"/>
+  <ellipse cx="128" cy="140" rx="38" ry="38" fill="#7a55b0" opacity=".5"/>
+  <!-- suggested arms - denser mist -->
+  <ellipse cx="86" cy="160" rx="14" ry="34" fill="#3a2070" opacity=".55" transform="rotate(-15 86 160)"/>
+  <ellipse cx="170" cy="160" rx="14" ry="34" fill="#3a2070" opacity=".55" transform="rotate(15 170 160)"/>
+  <!-- bright eye-points -->
+  <circle cx="118" cy="125" r="4" fill="#4ce9d9"/>
+  <circle cx="138" cy="125" r="4" fill="#4ce9d9"/>
+  <circle cx="118" cy="125" r="9" fill="#4ce9d9" opacity=".4"/>
+  <circle cx="138" cy="125" r="9" fill="#4ce9d9" opacity=".4"/>
+  <!-- mist wisps rising -->
+  <path d="M 90 100 Q 96 80 104 90 Q 110 70 118 85" stroke="#7a55b0" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"/>
+  <path d="M 138 85 Q 146 70 152 85 Q 160 75 168 95" stroke="#7a55b0" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"/>
+</svg>

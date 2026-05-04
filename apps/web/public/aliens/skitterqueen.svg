@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="55%" r="50%">
+      <stop offset="0" stop-color="#00d2c0" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#00d2c0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a3aa0"/>
+      <stop offset="1" stop-color="#2a1a55"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="80" ry="14" fill="url(#glow)"/>
+  <!-- crown thorax -->
+  <ellipse cx="128" cy="138" rx="58" ry="44" fill="url(#body)" stroke="#0c0e14" stroke-width="2"/>
+  <!-- crown spikes -->
+  <path d="M 128 92 L 122 70 L 118 92 Z M 128 92 L 134 70 L 138 92 Z M 96 110 L 88 90 L 100 110 Z M 160 110 L 168 90 L 156 110 Z" fill="#a778ff"/>
+  <!-- cores -->
+  <circle cx="108" cy="135" r="6" fill="#00d2c0"/>
+  <circle cx="128" cy="142" r="7" fill="#4ce9d9"/>
+  <circle cx="148" cy="135" r="6" fill="#00d2c0"/>
+  <!-- 6 legs -->
+  <path d="M 78 142 L 50 110 M 78 152 L 30 150 M 78 162 L 50 196" stroke="#3a2270" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M 178 142 L 206 110 M 178 152 L 226 150 M 178 162 L 206 196" stroke="#3a2270" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- sensor pits -->
+  <circle cx="118" cy="120" r="2" fill="#0c0e14"/>
+  <circle cx="128" cy="116" r="2" fill="#0c0e14"/>
+  <circle cx="138" cy="120" r="2" fill="#0c0e14"/>
+</svg>

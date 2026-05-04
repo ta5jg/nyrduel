@@ -1,5 +1,5 @@
-import { getAbility, getHero } from "@nyrduel/engine";
-import type { AbilityId, HeroId } from "@nyrduel/protocol";
+import { getAbility, getAlienBoss, getHero } from "@nyrduel/engine";
+import type { AbilityId, AlienBossId, HeroId } from "@nyrduel/protocol";
 import { Countdown } from "./Countdown.js";
 import { Leaderboard } from "./Leaderboard.js";
 import { ShareCard } from "./ShareCard.js";
@@ -9,7 +9,7 @@ type Props = {
   date: string;
   seed: string;
   player: { hero: HeroId; ability: AbilityId };
-  opponent: { hero: HeroId; ability: AbilityId };
+  opponent: { alienBossId: AlienBossId };
   outcome: "a" | "b" | "draw";
   ticks: number;
   remainingHpA: number;
@@ -23,13 +23,12 @@ type Props = {
 
 export function ResultScreen(p: Props) {
   const headline =
-    p.outcome === "a" ? "Victory" : p.outcome === "draw" ? "Draw" : "Defeat";
+    p.outcome === "a" ? "Repelled" : p.outcome === "draw" ? "Held the Line" : "Overrun";
   const isLoss = p.outcome === "b";
 
   const youHero = getHero(p.player.hero);
   const youAb = getAbility(p.player.ability);
-  const foeHero = getHero(p.opponent.hero);
-  const foeAb = getAbility(p.opponent.ability);
+  const foe = getAlienBoss(p.opponent.alienBossId);
 
   return (
     <>
@@ -50,10 +49,8 @@ export function ResultScreen(p: Props) {
           </div>
           <span className="muted">vs</span>
           <div className="row" style={{ gap: 4, fontSize: 13 }}>
-            <span className="muted">Foe:</span>
-            <strong>
-              {foeHero.name} · {foeAb.name}
-            </strong>
+            <span className="muted">Alien:</span>
+            <strong>{foe.name}</strong>
           </div>
         </div>
 

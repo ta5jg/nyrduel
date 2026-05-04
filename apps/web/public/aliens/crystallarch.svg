@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="100%" r="55%">
+      <stop offset="0" stop-color="#a778ff" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#a778ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="prism" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a778ff"/>
+      <stop offset=".4" stop-color="#4ce9d9"/>
+      <stop offset="1" stop-color="#3a2070"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="60" ry="14" fill="url(#glow)"/>
+  <!-- obelisk body -->
+  <path d="M 110 60 L 146 60 L 156 220 L 100 220 Z" fill="url(#prism)" stroke="#0c0e14" stroke-width="2"/>
+  <!-- facet lines -->
+  <path d="M 110 60 L 100 220 M 146 60 L 156 220 M 128 60 L 128 220" stroke="#0c0e14" stroke-width="1" stroke-opacity=".4"/>
+  <!-- prismatic core -->
+  <ellipse cx="128" cy="135" rx="14" ry="20" fill="#ffffff" opacity=".7"/>
+  <ellipse cx="128" cy="135" rx="6" ry="12" fill="#4ce9d9"/>
+  <!-- six radiating crystal arms -->
+  <path d="M 100 110 L 60 80 L 64 92 L 100 122 Z" fill="#5a3aa0" stroke="#0c0e14" stroke-width="1.5"/>
+  <path d="M 156 110 L 196 80 L 192 92 L 156 122 Z" fill="#5a3aa0" stroke="#0c0e14" stroke-width="1.5"/>
+  <path d="M 100 145 L 50 145 L 54 155 L 100 158 Z" fill="#5a3aa0" stroke="#0c0e14" stroke-width="1.5"/>
+  <path d="M 156 145 L 206 145 L 202 155 L 156 158 Z" fill="#5a3aa0" stroke="#0c0e14" stroke-width="1.5"/>
+  <path d="M 100 180 L 60 200 L 64 188 L 100 170 Z" fill="#5a3aa0" stroke="#0c0e14" stroke-width="1.5"/>
+  <path d="M 156 180 L 196 200 L 192 188 L 156 170 Z" fill="#5a3aa0" stroke="#0c0e14" stroke-width="1.5"/>
+  <!-- top point -->
+  <path d="M 110 60 L 128 30 L 146 60 Z" fill="#a778ff" stroke="#0c0e14" stroke-width="1.5"/>
+</svg>

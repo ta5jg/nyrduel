@@ -138,7 +138,7 @@ export function App() {
 
       {phase === "pre" && today && (
         <>
-          <OpponentCard heroId={today.opponent.hero} abilityId={today.opponent.ability} />
+          <OpponentCard alienBossId={today.opponent.alienBossId} />
           <HeroPicker value={hero} onChange={setHero} />
           <AbilityPicker heroId={hero} value={ability} onChange={setAbility} />
           <NameInput />

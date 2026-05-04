@@ -1,15 +1,31 @@
 /* =============================================================================
- * @nyrduel/protocol — wire contracts between web and gateway.
+ * File:           packages/protocol/src/index.ts
+ * Author:         USDTG GROUP TECHNOLOGY LLC
+ * Developer:      Irfan Gedik
+ * Created Date:   2026-05-04
+ * Last Update:    2026-05-04
+ * Version:        0.2.0
  *
- * Versioning: every payload carries a literal `v: 1`. Bump the literal when
- * making a breaking change so old clients fail fast instead of silently
- * misinterpreting fields.
+ * Description:
+ *   @nyrduel/protocol — wire contracts between web and gateway.
+ *
+ *   v0.2 design pivot: combat is human-versus-alien only. The player still
+ *   picks from six human hero archetypes plus an ability augment; the
+ *   opponent is now one of twelve alien bosses on a deterministic daily
+ *   rotation. Combat math is unchanged — only the foe's identity shifts.
+ *
+ *   Versioning: every payload carries a literal `v: 1`. Bump the literal
+ *   when making a breaking change so old clients fail fast instead of
+ *   silently misinterpreting fields.
+ *
+ * License:
+ *   Proprietary. All rights reserved. See LICENSE in the repository root.
  * ============================================================================= */
 
 export const PROTOCOL_VERSION = 1 as const;
 
 // ---------------------------------------------------------------------------
-// Hero + ability identifiers
+// Player side — six human hero archetypes, four ability augments.
 // ---------------------------------------------------------------------------
 
 export const HERO_IDS = ["soldier", "brute", "archer", "rogue", "mage", "paladin"] as const;
@@ -38,6 +54,40 @@ export type AbilityDef = {
 };
 
 // ---------------------------------------------------------------------------
+// Alien antagonist roster — twelve boss-class creatures in daily rotation.
+// Aliens have built-in kits (no ability augments), so the opponent payload
+// is leaner than the player's: just the boss id.
+// ---------------------------------------------------------------------------
+
+export const ALIEN_BOSS_IDS = [
+  "skitterqueen",
+  "voidking",
+  "hivelord",
+  "glyphtitan",
+  "riftherald",
+  "crystallarch",
+  "nullmaw",
+  "stormwalker",
+  "mistshaper",
+  "echobreed",
+  "tidegrasp",
+  "worldscar"
+] as const;
+export type AlienBossId = (typeof ALIEN_BOSS_IDS)[number];
+
+export type AlienBossDef = {
+  id: AlienBossId;
+  name: string;
+  blurb: string;
+  hp: number;
+  atk: number;
+  def: number;
+  spd: number;
+  critPct: number;
+  critMulPct: number;
+};
+
+// ---------------------------------------------------------------------------
 // /duel/today
 // ---------------------------------------------------------------------------
 
@@ -47,7 +97,7 @@ export type DuelTodayResponse = {
   date: string;          // YYYY-MM-DD UTC
   seed: string;          // nyrduel:<date>
   endsAtUtc: string;     // ISO8601, when today's seed rolls over
-  opponent: { hero: HeroId; ability: AbilityId };
+  opponent: { alienBossId: AlienBossId };
   prizePoolUsdtg: number;
 };
 
@@ -76,6 +126,8 @@ export type DuelSubmitResponseOk = {
   rank: number;        // your position on today's leaderboard, 1-based
   totalPlayers: number;
   improvedToday: boolean;  // true if this submission beat your previous score
+  /** Which alien the player faced (echoed for share-card / leaderboard context). */
+  alienBossId: AlienBossId;
 };
 
 export type DuelSubmitResponseErr = {
@@ -93,14 +145,14 @@ export type DuelSubmitResponse = DuelSubmitResponseOk | DuelSubmitResponseErr;
 
 export type DuelLeaderboardEntry = {
   rank: number;
-  user: string;             // opaque, server-assigned id
+  user: string;
   displayName: string | null;
   hero: HeroId;
   ability: AbilityId;
   outcome: "a" | "b" | "draw";
   ticks: number;
   score: number;
-  atMs: number;             // when submitted (UTC ms)
+  atMs: number;
 };
 
 export type DuelLeaderboardResponse = {
@@ -108,7 +160,7 @@ export type DuelLeaderboardResponse = {
   ok: true;
   date: string;
   top: DuelLeaderboardEntry[];
-  total: number;            // total submissions today
+  total: number;
   yours?: DuelLeaderboardEntry | null;
 };
 
@@ -120,13 +172,13 @@ export type DuelStreakResponse = {
   v: 1;
   ok: true;
   user: string;
-  current: number;          // consecutive UTC days played up to today
+  current: number;
   longest: number;
-  daysPlayed: number;       // total distinct UTC days played, all-time
+  daysPlayed: number;
 };
 
 // ---------------------------------------------------------------------------
-// Generic error envelope (for routes that don't have a typed shape yet)
+// Generic error envelope
 // ---------------------------------------------------------------------------
 
 export type ApiError = {

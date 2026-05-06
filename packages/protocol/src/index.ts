@@ -54,24 +54,31 @@ export type AbilityDef = {
 };
 
 // ---------------------------------------------------------------------------
-// Alien antagonist roster — twelve boss-class creatures in daily rotation.
+// Alien antagonist roster — twelve abstract entities in daily rotation.
+//
+// Design rule (see feedback_aliens_non_biological.md): aliens are *not*
+// creatures. They are architecture, geometry, energy, or phenomena. Every
+// id below is a noun drawn from those domains — never a species name. The
+// goal is strategic challenge through unfamiliar geometry, not biological
+// horror.
+//
 // Aliens have built-in kits (no ability augments), so the opponent payload
-// is leaner than the player's: just the boss id.
+// is leaner than the player's: just the entity id.
 // ---------------------------------------------------------------------------
 
 export const ALIEN_BOSS_IDS = [
-  "skitterqueen",
-  "voidking",
-  "hivelord",
-  "glyphtitan",
-  "riftherald",
-  "crystallarch",
-  "nullmaw",
-  "stormwalker",
-  "mistshaper",
-  "echobreed",
-  "tidegrasp",
-  "worldscar"
+  "lattice",
+  "crown",
+  "choir",
+  "citadel",
+  "seam",
+  "vault",
+  "gate",
+  "pillar",
+  "veil",
+  "mark",
+  "spoke",
+  "continent"
 ] as const;
 export type AlienBossId = (typeof ALIEN_BOSS_IDS)[number];
 

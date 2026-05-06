@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="60%" r="55%">
+      <stop offset="0" stop-color="#4ce9d9" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#4ce9d9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="p" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a778ff"/>
+      <stop offset=".5" stop-color="#4ce9d9"/>
+      <stop offset="1" stop-color="#3a2070"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="70" ry="14" fill="url(#g)"/>
+  <!-- Sealed prismatic gem fortress — large octahedron with internal facet
+       lines. No anatomy. Pure crystal architecture. -->
+  <polygon points="128,40 196,128 128,216 60,128"
+           fill="url(#p)" stroke="#0c0e14" stroke-width="2"/>
+  <!-- internal facets -->
+  <line x1="128" y1="40" x2="128" y2="216" stroke="#0c0e14" stroke-width="1" opacity=".5"/>
+  <line x1="60" y1="128" x2="196" y2="128" stroke="#0c0e14" stroke-width="1" opacity=".5"/>
+  <line x1="92" y1="84" x2="164" y2="172" stroke="#0c0e14" stroke-width="0.8" opacity=".4"/>
+  <line x1="164" y1="84" x2="92" y2="172" stroke="#0c0e14" stroke-width="0.8" opacity=".4"/>
+  <!-- sealed core glow -->
+  <ellipse cx="128" cy="128" rx="18" ry="26" fill="#fff" opacity=".7"/>
+  <ellipse cx="128" cy="128" rx="9" ry="14" fill="#a778ff"/>
+  <!-- light leakage between facets -->
+  <line x1="128" y1="56" x2="128" y2="76" stroke="#fff" stroke-width="2" opacity=".7"/>
+  <line x1="180" y1="128" x2="160" y2="128" stroke="#fff" stroke-width="2" opacity=".7"/>
+  <line x1="76" y1="128" x2="96" y2="128" stroke="#fff" stroke-width="2" opacity=".7"/>
+</svg>

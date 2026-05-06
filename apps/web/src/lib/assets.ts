@@ -20,22 +20,24 @@ export const HERO_ART: Record<HeroId, string> = {
 };
 
 /**
- * Alien boss portraits — opponent side of every duel. Replace these with
- * the DALL-E paintings from `art/PROMPTS-DALLE-ALIENS.md` once generated.
+ * Alien entity portraits — opponent side of every duel. Each entity is
+ * non-biological (architecture, geometry, energy, phenomenon) so the
+ * visuals never trigger biophobia or evoke Earth creatures. Replace
+ * these placeholder SVGs with painted DALL-E art when generated.
  */
 export const ALIEN_BOSS_ART: Record<AlienBossId, string> = {
-  skitterqueen: "/aliens/skitterqueen.svg",
-  voidking: "/aliens/voidking.svg",
-  hivelord: "/aliens/hivelord.svg",
-  glyphtitan: "/aliens/glyphtitan.svg",
-  riftherald: "/aliens/riftherald.svg",
-  crystallarch: "/aliens/crystallarch.svg",
-  nullmaw: "/aliens/nullmaw.svg",
-  stormwalker: "/aliens/stormwalker.svg",
-  mistshaper: "/aliens/mistshaper.svg",
-  echobreed: "/aliens/echobreed.svg",
-  tidegrasp: "/aliens/tidegrasp.svg",
-  worldscar: "/aliens/worldscar.svg"
+  lattice: "/aliens/lattice.svg",
+  crown: "/aliens/crown.svg",
+  choir: "/aliens/choir.svg",
+  citadel: "/aliens/citadel.svg",
+  seam: "/aliens/seam.svg",
+  vault: "/aliens/vault.svg",
+  gate: "/aliens/gate.svg",
+  pillar: "/aliens/pillar.svg",
+  veil: "/aliens/veil.svg",
+  mark: "/aliens/mark.svg",
+  spoke: "/aliens/spoke.svg",
+  continent: "/aliens/continent.svg"
 };
 
 /**

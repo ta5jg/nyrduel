@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="50%" r="55%">
+      <stop offset="0" stop-color="#a778ff" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#a778ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="abyss" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#000"/>
+      <stop offset=".7" stop-color="#1a0e2a"/>
+      <stop offset="1" stop-color="#5a3aa0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="80" ry="14" fill="url(#g)"/>
+  <!-- A circular event horizon — geometric ring with abyss inside. No
+       petals, no mouth, no teeth. Just a gate. -->
+  <circle cx="128" cy="130" r="92" fill="none" stroke="#a778ff" stroke-width="3" opacity=".55"/>
+  <circle cx="128" cy="130" r="80" fill="none" stroke="#7a55b0" stroke-width="2"/>
+  <circle cx="128" cy="130" r="68" fill="url(#abyss)"/>
+  <!-- frame ticks at cardinal points (geometric, not biological) -->
+  <line x1="128" y1="42" x2="128" y2="58" stroke="#a778ff" stroke-width="3"/>
+  <line x1="128" y1="202" x2="128" y2="218" stroke="#a778ff" stroke-width="3"/>
+  <line x1="36" y1="130" x2="52" y2="130" stroke="#a778ff" stroke-width="3"/>
+  <line x1="204" y1="130" x2="220" y2="130" stroke="#a778ff" stroke-width="3"/>
+  <line x1="68" y1="68" x2="78" y2="78" stroke="#7a55b0" stroke-width="2"/>
+  <line x1="178" y1="68" x2="188" y2="78" stroke="#7a55b0" stroke-width="2"/>
+  <line x1="68" y1="192" x2="78" y2="182" stroke="#7a55b0" stroke-width="2"/>
+  <line x1="178" y1="192" x2="188" y2="182" stroke="#7a55b0" stroke-width="2"/>
+  <!-- distant stars in the abyss -->
+  <circle cx="116" cy="120" r="1" fill="#fff"/>
+  <circle cx="138" cy="138" r="1.2" fill="#fff"/>
+  <circle cx="124" cy="148" r="0.8" fill="#fff"/>
+  <circle cx="142" cy="118" r="1" fill="#fff"/>
+  <circle cx="110" cy="142" r="0.9" fill="#fff"/>
+  <circle cx="146" cy="146" r="1.1" fill="#fff"/>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="50%" r="55%">
+      <stop offset="0" stop-color="#4ce9d9" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#4ce9d9" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hub" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".5" stop-color="#4ce9d9"/>
+      <stop offset="1" stop-color="#0c4a44"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="80" ry="14" fill="url(#g)"/>
+  <!-- Radial spoke engine — central hub with eight rigid spokes radiating
+       outward at perfect angles. Pure geometry, no anatomy. -->
+  <line x1="128" y1="130" x2="128" y2="40" stroke="#7a55b0" stroke-width="6" stroke-linecap="round"/>
+  <line x1="128" y1="130" x2="128" y2="220" stroke="#7a55b0" stroke-width="6" stroke-linecap="round"/>
+  <line x1="128" y1="130" x2="38" y2="130" stroke="#7a55b0" stroke-width="6" stroke-linecap="round"/>
+  <line x1="128" y1="130" x2="218" y2="130" stroke="#7a55b0" stroke-width="6" stroke-linecap="round"/>
+  <line x1="128" y1="130" x2="64" y2="66" stroke="#5a3aa0" stroke-width="5" stroke-linecap="round"/>
+  <line x1="128" y1="130" x2="192" y2="66" stroke="#5a3aa0" stroke-width="5" stroke-linecap="round"/>
+  <line x1="128" y1="130" x2="64" y2="194" stroke="#5a3aa0" stroke-width="5" stroke-linecap="round"/>
+  <line x1="128" y1="130" x2="192" y2="194" stroke="#5a3aa0" stroke-width="5" stroke-linecap="round"/>
+  <!-- spoke tips — energy capacitors -->
+  <circle cx="128" cy="40" r="6" fill="#a778ff" stroke="#fff" stroke-width="1"/>
+  <circle cx="128" cy="220" r="6" fill="#a778ff" stroke="#fff" stroke-width="1"/>
+  <circle cx="38" cy="130" r="6" fill="#a778ff" stroke="#fff" stroke-width="1"/>
+  <circle cx="218" cy="130" r="6" fill="#a778ff" stroke="#fff" stroke-width="1"/>
+  <circle cx="64" cy="66" r="5" fill="#4ce9d9" stroke="#fff" stroke-width="1"/>
+  <circle cx="192" cy="66" r="5" fill="#4ce9d9" stroke="#fff" stroke-width="1"/>
+  <circle cx="64" cy="194" r="5" fill="#4ce9d9" stroke="#fff" stroke-width="1"/>
+  <circle cx="192" cy="194" r="5" fill="#4ce9d9" stroke="#fff" stroke-width="1"/>
+  <!-- containment ring -->
+  <circle cx="128" cy="130" r="50" fill="none" stroke="#4ce9d9" stroke-width="1" opacity=".5"/>
+  <!-- central hub -->
+  <circle cx="128" cy="130" r="22" fill="url(#hub)" stroke="#0c0e14" stroke-width="2"/>
+  <circle cx="128" cy="130" r="6" fill="#fff"/>
+</svg>

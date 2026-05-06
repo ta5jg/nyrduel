@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="50%" r="55%">
+      <stop offset="0" stop-color="#a778ff" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#a778ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="70" ry="14" fill="url(#g)"/>
+  <!-- Recursive sigil — concentric self-similar triangles + circle, the
+       entity IS the geometric mark, not a creature wearing one. -->
+  <polygon points="128,40 220,200 36,200" fill="none" stroke="#a778ff" stroke-width="3"/>
+  <polygon points="128,80 188,180 68,180" fill="none" stroke="#7a55b0" stroke-width="2.4"/>
+  <polygon points="128,120 156,160 100,160" fill="none" stroke="#4ce9d9" stroke-width="2"/>
+  <polygon points="128,140 142,156 114,156" fill="#4ce9d9"/>
+  <!-- recursive small triangles at vertices -->
+  <polygon points="220,200 230,212 210,212" fill="#a778ff"/>
+  <polygon points="36,200 46,212 26,212" fill="#a778ff"/>
+  <polygon points="128,40 134,30 122,30" fill="#a778ff"/>
+  <!-- enclosing circle -->
+  <circle cx="128" cy="148" r="100" fill="none" stroke="#a778ff" stroke-width="1" opacity=".55"/>
+  <circle cx="128" cy="148" r="72" fill="none" stroke="#7a55b0" stroke-width="0.8" opacity=".5"/>
+  <!-- runic ticks around the circle -->
+  <line x1="128" y1="48" x2="128" y2="58" stroke="#fff" stroke-width="1.4"/>
+  <line x1="220" y1="148" x2="210" y2="148" stroke="#fff" stroke-width="1.4"/>
+  <line x1="36" y1="148" x2="46" y2="148" stroke="#fff" stroke-width="1.4"/>
+  <line x1="128" y1="248" x2="128" y2="240" stroke="#fff" stroke-width="1.4"/>
+</svg>

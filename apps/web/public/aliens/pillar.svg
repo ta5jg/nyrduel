@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="50%" r="55%">
+      <stop offset="0" stop-color="#4ce9d9" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#4ce9d9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="p" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a778ff"/>
+      <stop offset=".5" stop-color="#fff"/>
+      <stop offset="1" stop-color="#4ce9d9"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="60" ry="14" fill="url(#g)"/>
+  <!-- Vertical lightning column inside an enclosing geometric frame. The
+       column is rigid (not creature-like). -->
+  <!-- Frame -->
+  <line x1="100" y1="40" x2="100" y2="216" stroke="#3a2070" stroke-width="3"/>
+  <line x1="156" y1="40" x2="156" y2="216" stroke="#3a2070" stroke-width="3"/>
+  <line x1="92" y1="40" x2="164" y2="40" stroke="#3a2070" stroke-width="3"/>
+  <line x1="92" y1="216" x2="164" y2="216" stroke="#3a2070" stroke-width="3"/>
+  <!-- Ordered lightning column inside -->
+  <path d="M 128 44 L 136 70 L 120 90 L 138 110 L 118 130 L 140 150 L 116 170 L 132 190 L 128 212"
+        stroke="url(#p)" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 128 44 L 136 70 L 120 90 L 138 110 L 118 130 L 140 150 L 116 170 L 132 190 L 128 212"
+        stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- horizontal accent bars indicating energy levels -->
+  <line x1="105" y1="80" x2="115" y2="80" stroke="#4ce9d9" stroke-width="2"/>
+  <line x1="141" y1="80" x2="151" y2="80" stroke="#4ce9d9" stroke-width="2"/>
+  <line x1="105" y1="130" x2="115" y2="130" stroke="#4ce9d9" stroke-width="2"/>
+  <line x1="141" y1="130" x2="151" y2="130" stroke="#4ce9d9" stroke-width="2"/>
+  <line x1="105" y1="180" x2="115" y2="180" stroke="#4ce9d9" stroke-width="2"/>
+  <line x1="141" y1="180" x2="151" y2="180" stroke="#4ce9d9" stroke-width="2"/>
+</svg>

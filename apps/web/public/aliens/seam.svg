@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="50%" r="55%">
+      <stop offset="0" stop-color="#a778ff" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#a778ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="t" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c0610"/>
+      <stop offset=".5" stop-color="#3a2070"/>
+      <stop offset="1" stop-color="#0c0610"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="128" cy="240" rx="50" ry="14" fill="url(#g)"/>
+  <!-- A vertical jagged tear in space. No body. The threat IS the seam. -->
+  <path d="M 128 30 L 134 50 L 122 80 L 138 110 L 118 140 L 140 170 L 116 200 L 132 226"
+        stroke="#a778ff" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M 128 30 L 134 50 L 122 80 L 138 110 L 118 140 L 140 170 L 116 200 L 132 226"
+        stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- gravitational distortion field around the seam -->
+  <ellipse cx="128" cy="128" rx="60" ry="100" fill="url(#g)" opacity=".25"/>
+  <ellipse cx="128" cy="128" rx="40" ry="80" fill="none" stroke="#4ce9d9" stroke-width="0.8" opacity=".5"/>
+  <ellipse cx="128" cy="128" rx="20" ry="60" fill="none" stroke="#4ce9d9" stroke-width="0.6" opacity=".4"/>
+  <!-- starlight motes on either side of the seam -->
+  <circle cx="80" cy="80" r="1.5" fill="#fff"/>
+  <circle cx="180" cy="100" r="1.5" fill="#fff"/>
+  <circle cx="90" cy="160" r="1.5" fill="#fff"/>
+  <circle cx="170" cy="180" r="1.5" fill="#fff"/>
+  <circle cx="60" cy="120" r="1.2" fill="#4ce9d9"/>
+  <circle cx="200" cy="140" r="1.2" fill="#4ce9d9"/>
+</svg>

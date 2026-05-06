@@ -3,17 +3,18 @@
  * Author:         USDTG GROUP TECHNOLOGY LLC
  * Developer:      Irfan Gedik
  * Created Date:   2026-05-04
- * Last Update:    2026-05-04
- * Version:        0.2.0
+ * Last Update:    2026-05-06
+ * Version:        0.3.0
  *
  * Description:
- *   Alien antagonist catalog — twelve boss-class creatures that rotate as
- *   the daily opponent. Stats are balanced in roughly the same envelope as
- *   the player hero set so a well-built loadout can win, but each boss has
- *   a distinct flavour and threat profile.
+ *   Alien antagonist catalog — twelve abstract entities that rotate as the
+ *   daily opponent.
  *
- *   Combat is human-versus-alien only. Aliens are the sole antagonist class
- *   in Nyrduel — there is no human-versus-human mode.
+ *   Design rule: aliens are not creatures. Each entry below is an
+ *   architectural, geometric, or phenomenological entity. Names are
+ *   single-word nouns from architecture / geometry / cosmology — never
+ *   species labels. Combat math is unchanged; only the identity skin is
+ *   non-biological so the game cannot be read as evoking Earth life.
  *
  * License:
  *   Proprietary. All rights reserved. See LICENSE in the repository root.
@@ -28,9 +29,9 @@ import type { Unit } from "./heroes.js";
 
 export const ALIEN_BOSSES: readonly AlienBossDef[] = [
   {
-    id: "skitterqueen",
-    name: "Skitterqueen",
-    blurb: "Crystal-thoraxed swarmer matriarch. Strikes fast, breaks easily.",
+    id: "lattice",
+    name: "Lattice",
+    blurb: "Self-assembling tessellation cluster. Many planes, brittle facets.",
     hp: 22,
     atk: 9,
     def: 1,
@@ -39,9 +40,9 @@ export const ALIEN_BOSSES: readonly AlienBossDef[] = [
     critMulPct: 160
   },
   {
-    id: "voidking",
-    name: "Voidking",
-    blurb: "Tendril-crowned caster. Hurls singularities at range.",
+    id: "crown",
+    name: "Crown",
+    blurb: "Singularity ringed by orbital arcs. Hurls collapsed mass at range.",
     hp: 26,
     atk: 11,
     def: 1,
@@ -50,9 +51,9 @@ export const ALIEN_BOSSES: readonly AlienBossDef[] = [
     critMulPct: 175
   },
   {
-    id: "hivelord",
-    name: "Hivelord",
-    blurb: "Eight-limbed scything chitin colossus. Slow and unrelenting.",
+    id: "choir",
+    name: "Choir",
+    blurb: "Group of resonant monoliths. Strikes by harmonic concussion.",
     hp: 38,
     atk: 8,
     def: 3,
@@ -61,9 +62,9 @@ export const ALIEN_BOSSES: readonly AlienBossDef[] = [
     critMulPct: 150
   },
   {
-    id: "glyphtitan",
-    name: "Glyphtitan",
-    blurb: "Six-trunked stone-mass with shifting glyphs. Earth-shaking presence.",
+    id: "citadel",
+    name: "Citadel",
+    blurb: "Towering geometric fortress. Earth-shaking footfall, slow advance.",
     hp: 50,
     atk: 7,
     def: 4,
@@ -72,9 +73,9 @@ export const ALIEN_BOSSES: readonly AlienBossDef[] = [
     critMulPct: 150
   },
   {
-    id: "riftherald",
-    name: "Riftherald",
-    blurb: "Folded-space figure haloed in starlight. Phases between strikes.",
+    id: "seam",
+    name: "Seam",
+    blurb: "Vertical tear in space. Phases between strikes, hard to read.",
     hp: 24,
     atk: 9,
     def: 2,
@@ -83,9 +84,9 @@ export const ALIEN_BOSSES: readonly AlienBossDef[] = [
     critMulPct: 165
   },
   {
-    id: "crystallarch",
-    name: "Crystallarch",
-    blurb: "Prism-bodied obelisk-being. Reflects damage; hard to crack.",
+    id: "vault",
+    name: "Vault",
+    blurb: "Sealed prismatic gem fortress. Reflects and resists.",
     hp: 32,
     atk: 7,
     def: 4,
@@ -94,9 +95,9 @@ export const ALIEN_BOSSES: readonly AlienBossDef[] = [
     critMulPct: 150
   },
   {
-    id: "nullmaw",
-    name: "Nullmaw",
-    blurb: "Twelve-petaled circular maw. One bite carries planet-weight.",
+    id: "gate",
+    name: "Gate",
+    blurb: "Circular event horizon. One pulse from it carries planet-weight.",
     hp: 28,
     atk: 12,
     def: 1,
@@ -105,9 +106,9 @@ export const ALIEN_BOSSES: readonly AlienBossDef[] = [
     critMulPct: 150
   },
   {
-    id: "stormwalker",
-    name: "Stormwalker",
-    blurb: "Lightning-cored alien on crystal stilts. Faster than thought.",
+    id: "pillar",
+    name: "Pillar",
+    blurb: "Rigid lightning column on stilts. Faster than it has any right to be.",
     hp: 18,
     atk: 8,
     def: 1,
@@ -116,9 +117,9 @@ export const ALIEN_BOSSES: readonly AlienBossDef[] = [
     critMulPct: 160
   },
   {
-    id: "mistshaper",
-    name: "Mistshaper",
-    blurb: "Vapor-bodied haunter. Hard to hit, harder to harm.",
+    id: "veil",
+    name: "Veil",
+    blurb: "Refraction cloud. Hard to hit, harder to harm.",
     hp: 26,
     atk: 6,
     def: 5,
@@ -127,9 +128,9 @@ export const ALIEN_BOSSES: readonly AlienBossDef[] = [
     critMulPct: 150
   },
   {
-    id: "echobreed",
-    name: "Echobreed",
-    blurb: "Three-shadow phaser. Each strike rings through dimensions.",
+    id: "mark",
+    name: "Mark",
+    blurb: "Fractal recursion sigil. Each strike rings through dimensions.",
     hp: 28,
     atk: 9,
     def: 2,
@@ -138,9 +139,9 @@ export const ALIEN_BOSSES: readonly AlienBossDef[] = [
     critMulPct: 160
   },
   {
-    id: "tidegrasp",
-    name: "Tidegrasp",
-    blurb: "Tendril-fan drifter. Slow but devastating reach.",
+    id: "spoke",
+    name: "Spoke",
+    blurb: "Radial pulse engine. Slow rotations, devastating reach.",
     hp: 36,
     atk: 10,
     def: 2,
@@ -149,9 +150,9 @@ export const ALIEN_BOSSES: readonly AlienBossDef[] = [
     critMulPct: 150
   },
   {
-    id: "worldscar",
-    name: "Worldscar",
-    blurb: "Mountain-sized ancient. Five tower-eyes; slow as continents.",
+    id: "continent",
+    name: "Continent",
+    blurb: "Planetary-scale glyph formation. Slow as continents, weighty as one.",
     hp: 55,
     atk: 6,
     def: 4,
@@ -173,7 +174,7 @@ export function getAlienBoss(id: AlienBossId): AlienBossDef {
   return a;
 }
 
-/** Resolve an alien boss id into a battle-engine Unit. */
+/** Resolve an alien entity id into a battle-engine Unit. */
 export function resolveAlienUnit(id: AlienBossId): Unit {
   const b = getAlienBoss(id);
   return {
